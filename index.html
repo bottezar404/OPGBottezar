@@ -16,6 +16,7 @@
   --serif:"Newsreader",Georgia,"Times New Roman",serif;
   --sans:"Figtree",system-ui,-apple-system,"Segoe UI",sans-serif;
   --scrim:rgb(12 15 9/.95); --on-scrim:#fff;
+  --fruit:#8DB92E; --fruit-shine:#DDEDB0;
   color-scheme:light;
   box-sizing:border-box;
   padding-top:env(safe-area-inset-top,0px);
@@ -64,6 +65,8 @@ nav a:hover{text-decoration:underline}
 .btn{display:inline-block;background:var(--olive);color:var(--on-olive);padding:.85rem 1.6rem;border-radius:.4rem;font-weight:600;text-decoration:none}
 .btn:hover{filter:brightness(1.1)}
 .branch{width:100%;height:auto;max-height:26rem}
+.branch .fruit{fill:var(--fruit)}
+.branch .shine{fill:var(--fruit-shine)}
 section{padding:4.5rem 0;border-top:1px solid var(--line)}
 h2{font:400 clamp(2rem,5vw,3rem)/1.1 var(--serif);margin:0 0 1.5rem;letter-spacing:-.01em}
 .about{display:grid;grid-template-columns:1fr 1.4fr;gap:3rem}
@@ -120,8 +123,21 @@ footer{padding:2.5rem 0 3rem;border-top:1px solid var(--line);color:var(--muted)
   .gallery{grid-template-columns:repeat(2,1fr);gap:.6rem}
 }
 @media (prefers-reduced-motion:no-preference){
-  .branch .leaf{transform-origin:var(--ox) var(--oy);animation:sway 7s ease-in-out infinite alternate}
-  @keyframes sway{to{transform:rotate(3deg)}}
+  /* The branch from the label grows in (stem, then leaves unfold, then olives drop in),
+     then keeps moving gently: the bough sways from its tip, leaves flutter, olives swing.
+     Entrance uses `scale`/`translate`, the idle motion uses `rotate`, so they don't clash. */
+  .branch .bough{transform-origin:232px 40px;animation:bough-sway 9s ease-in-out 2.4s infinite alternate}
+  .branch .stem{opacity:0;animation:fade-in .7s ease-out .1s forwards}
+  .branch .leaf,.branch .fruit{transform-origin:var(--ox) var(--oy)}
+  .branch .leaf{scale:0;animation:unfold .7s cubic-bezier(.3,1.4,.6,1) var(--d) forwards,flutter 5s ease-in-out calc(var(--d) + .7s) infinite alternate}
+  .branch .fruit{opacity:0;translate:0 -24px;animation:drop .6s cubic-bezier(.3,1.5,.6,1) var(--d) forwards,swing 4.5s ease-in-out calc(var(--d) + .6s) infinite alternate}
+  .branch .fruit:nth-of-type(2){animation-duration:.6s,5.2s}
+  @keyframes fade-in{to{opacity:1}}
+  @keyframes unfold{to{scale:1}}
+  @keyframes drop{to{opacity:1;translate:0 0}}
+  @keyframes bough-sway{from{rotate:-1deg}to{rotate:1.2deg}}
+  @keyframes flutter{from{rotate:-2.5deg}to{rotate:3deg}}
+  @keyframes swing{from{rotate:-3deg}to{rotate:3deg}}
 }
 </style>
 </head>
@@ -161,20 +177,18 @@ footer{padding:2.5rem 0 3rem;border-top:1px solid var(--line);color:var(--muted)
         <h1><small data-hr="Obiteljsko poljoprivredno gospodarstvo · Vranje Selo kraj Vižinade" data-en="Family farm · Vranje Selo near Vižinada">Obiteljsko poljoprivredno gospodarstvo · Vranje Selo kraj Vižinade</small>Bottezar</h1>
         <p data-hr="Ekstra djevičansko maslinovo ulje iz naših nasada u Istri. Isto ulje koje koristimo i sami." data-en="Extra virgin olive oil from our groves in Istria. The same oil we use ourselves.">Ekstra djevičansko maslinovo ulje iz naših nasada u Istri. Isto ulje koje koristimo i sami.</p>
       </div>
-      <svg class="branch" viewBox="0 0 400 420" role="img" aria-label="Maslinova grančica / Olive branch">
-        <path d="M200 410 C190 300 215 210 170 90" fill="none" stroke="var(--olive)" stroke-width="5" stroke-linecap="round"/>
-        <g fill="var(--leaf)">
-          <ellipse class="leaf" style="--ox:200px;--oy:340px" cx="250" cy="330" rx="46" ry="12" transform="rotate(-28 250 330)"/>
-          <ellipse class="leaf" style="--ox:200px;--oy:340px" cx="146" cy="300" rx="46" ry="12" transform="rotate(28 146 300)"/>
-          <ellipse class="leaf" style="--ox:205px;--oy:250px" cx="256" cy="236" rx="44" ry="11" transform="rotate(-30 256 236)"/>
-          <ellipse class="leaf" style="--ox:195px;--oy:230px" cx="140" cy="206" rx="44" ry="11" transform="rotate(30 140 206)"/>
-          <ellipse class="leaf" style="--ox:185px;--oy:160px" cx="236" cy="140" rx="40" ry="10" transform="rotate(-32 236 140)"/>
-          <ellipse class="leaf" style="--ox:175px;--oy:130px" cx="118" cy="116" rx="40" ry="10" transform="rotate(32 118 116)"/>
-          <ellipse class="leaf" style="--ox:170px;--oy:90px" cx="172" cy="62" rx="38" ry="10" transform="rotate(-85 172 62)"/>
-        </g>
-        <g fill="var(--olive)">
-          <ellipse cx="206" cy="282" rx="13" ry="17"/>
-          <ellipse cx="184" cy="178" rx="12" ry="16"/>
+      <svg class="branch" viewBox="0 0 790 600" role="img" aria-label="Maslinova grančica / Olive branch">
+        <g class="bough" fill="var(--olive)">
+          <path class="stem" d="M754.6 580.1C754.3 579.7 751.6 572.4 748.7 563.9C716.7 472.7 675.7 415.5 608.9 369.1L600.4 363.1L597.2 368C591.4 376.8 589.8 382.4 589.3 394.5C588.9 403.3 589.3 407 590.8 413C592 417.3 592.4 420.9 591.9 421.4C589.6 423.9 585.5 402.9 586.3 392.5C586.9 383.7 590.1 374 594.6 367.2C596.6 364.2 598 361.7 597.8 361.5C596.3 360.1 573.3 346.6 560.5 339.5C544.6 330.7 465 291 463.2 291C462.7 291 461.8 292.9 461.1 295.2C457.8 306.5 444.7 330.1 442.9 328.3C442.2 327.6 442.8 326 444.5 323.4C450 315.4 461.2 290.8 459.9 289.6C459.7 289.4 447.4 283.3 432.6 276.1L405.7 263L395.6 268C390 270.7 384.3 273.2 382.8 273.6C379.1 274.4 379.1 272.3 382.7 270.8C384.3 270.2 389.3 267.9 394 265.8C404.1 261.1 404.9 262.3 384.5 251.3C303.1 207.3 254.5 159.8 238.2 108C232.4 89.6 231.5 83.4 231.5 60.7C231.5 39.8 231.5 39.8 233.9 37.9C237.8 34.8 239.5 35.8 239.4 41C238.7 61.9 239 75.6 240.4 84C249.9 142.6 291.4 190.5 375 239.4C397.8 252.7 459.3 283.4 462 282.7C463.2 282.4 464 282.7 464 283.5C464 284.1 472.9 288.9 483.8 294C550.3 325.3 591.8 348.1 623.8 371C629.2 374.9 631.1 375.8 631.6 374.7C631.9 373.9 631.4 367.2 630.6 359.9C625.2 313.8 633 264.9 652.7 220.5C659.5 205.2 659.7 204.9 660.4 208C671.4 258.6 666.4 311.5 645.4 365.8C643.4 370.9 641.6 374.9 641.4 374.7C641.2 374.6 642.2 368.3 643.5 360.9C651.9 315.2 655 286.6 654.9 257.7C654.7 234.2 654.5 234.8 651 269.5C648 299 640.2 344.5 633.9 369.4C632 376.9 632 377.3 633.7 378.6C634.7 379.3 636 379.8 636.7 379.5C637.4 379.3 637.7 379.6 637.5 380.3C637.3 381 640.5 384.2 644.6 387.5C654.3 395.3 677.7 419.1 686.5 430.3C708.5 458.1 726.5 488.7 741.9 524.8C748.9 541.1 761 574.2 761 577C761 579.8 755.9 582.3 754.6 580.1Z"/>
+          <path class="leaf" style="--ox:292px;--oy:192px;--d:0.35s" d="M252.5 195.5C165.6 182.3 86.6 146.5 29 94.2C23.5 89.2 22.8 89.3 45.6 91.5C126.8 99.3 198.3 125.8 258.7 170.5C265.7 175.8 276.8 183.6 283.2 188C289.6 192.4 295.1 196.4 295.5 197C296.4 198.4 286 193.2 266.3 182.4C215.7 154.7 168.3 134.5 114 117.6C96.4 112.2 73.8 105.9 73.3 106.3C73.1 106.5 82.6 110.2 94.2 114.5C143.9 132.8 185.5 150.4 221 168.1C240.6 177.9 271.1 194.8 273.4 197.1C274.9 198.5 269.2 198.1 252.5 195.5Z"/>
+          <path class="leaf" style="--ox:340px;--oy:208px;--d:0.47s" d="M329.4 202.2C306.3 163.2 294 120.9 293.9 79.7C293.9 71.5 294.1 64.6 294.3 64.3C295.1 63.6 304 77.1 311.9 91C326.7 116.9 337.4 148.3 341 177C342 185.4 343.8 210.2 343.4 210.8C343.3 211 341.3 206.2 339 200.3C322.2 157.6 316.7 140.5 304.9 94.6C303 87.4 303 91.7 305 105.2C307.9 124.8 314.7 150.6 325.5 182.5C330.7 197.8 334.8 210.5 334.7 210.6C334.6 210.8 332.2 206.9 329.4 202.2Z"/>
+          <path class="leaf" style="--ox:384px;--oy:210px;--d:0.59s" d="M358.4 210.5C358.4 207.2 357.9 198.7 357.1 191.6C354.3 165.1 356.8 130.9 363.5 104C368 86.1 377.3 61 384.7 46.5L386.8 42.6L388.4 50C396.1 85.5 394 130.6 382.6 172.1C379.2 184.4 369.1 212.5 368.3 211.7C368.1 211.5 368.9 206.6 369.9 200.9C374.9 174.8 379.4 144.4 381 125.5C381.9 114 382.4 73.2 381.6 74.1C381.4 74.3 380.5 82.4 379.6 92C376.5 125.1 372.1 153.9 364.5 189.5C358.7 216.8 358.2 218.2 358.4 210.5Z"/>
+          <path class="leaf" style="--ox:372px;--oy:214px;--d:0.71s" d="M367.5 217.5C369 214.8 372 210 374 207C376 204 380.7 196.1 384.5 189.5C425.7 116.8 488 57.6 562.8 20.1C572.8 15.1 572.7 14.5 563.7 32.5C529.6 101 471.9 161.9 400.3 205.3C395.2 208.4 389.6 211.7 387.8 212.6L384.6 214.3L386.5 211.4C405.2 182.4 440.8 141.9 494.9 88C532.9 50.2 534 49 521.5 59C496.6 79 478.3 95.5 453.5 120.4C426 148 411.7 164.2 385.3 197.7C366.8 221.2 362.7 225.7 367.5 217.5Z"/>
+          <path class="leaf" style="--ox:390px;--oy:234px;--d:0.83s" d="M440 243.3C438.1 243.2 431.6 242.5 425.5 242C410.5 240.6 398 238.7 398 238C398 237.6 404.2 235.6 411.7 233.5C460.9 220 512.4 211.5 597 203.1L615.5 201.3L598.5 201.1C541.8 200.7 475 209 413 224.1C374.1 233.6 368.2 234.5 386.5 228.1C391.4 226.3 403.4 221.8 413 218C474.1 194.1 530.3 184.5 590 187.9C618.9 189.5 665 195.8 665 198.2C665 200.3 630.6 215.4 610 222.3C577.9 233.1 543.9 240.1 508.7 242.9C497.2 243.9 448.7 244.2 440 243.3Z"/>
+          <path class="leaf" style="--ox:646px;--oy:380px;--d:0.95s" d="M647.5 382.9C648.6 382.4 657.4 378.7 667 374.7C697.5 361.8 720.5 349.8 734.5 339.5C740.8 334.9 741.4 334.6 717.5 346.6C706.5 352.1 691.6 359 684.5 361.9C667.8 368.8 642.9 378.2 642.5 377.8C642.3 377.6 645.7 374.7 649.9 371.3C678.8 348.3 710.2 334.4 746.7 328.5C762.6 325.9 762.8 326.2 752.6 335C727.1 356.9 699.1 371.4 666.5 379.5C652.7 382.9 644 384.5 647.5 382.9Z"/>
+          <g class="fruit" style="--ox:392px;--oy:262px;--d:1.35s"><ellipse cx="283" cy="305" rx="101" ry="71" transform="rotate(156 283 305)"/><ellipse class="shine" cx="337" cy="320" rx="17" ry="12" transform="rotate(-35 337 320)"/></g>
+          <g class="fruit" style="--ox:452px;--oy:300px;--d:1.5s"><ellipse cx="396" cy="414" rx="98" ry="69" transform="rotate(103 396 414)"/><ellipse class="shine" cx="441" cy="370" rx="10" ry="19" transform="rotate(-8 441 370)"/></g>
+          <g class="fruit" style="--ox:592px;--oy:372px;--d:1.65s"><ellipse cx="628" cy="506" rx="92" ry="64" transform="rotate(65 628 506)"/><ellipse class="shine" cx="640" cy="447" rx="15" ry="11" transform="rotate(30 640 447)"/></g>
         </g>
       </svg>
     </div>
