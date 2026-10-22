@@ -39,7 +39,15 @@ header.top .brand{font:600 1.1rem var(--serif);text-decoration:none}
 nav{display:flex;gap:1.5rem;align-items:center;flex-wrap:wrap}
 nav a{text-decoration:none;font-weight:500;font-size:.95rem}
 nav a:hover{text-decoration:underline}
-.lang{font:600 .85rem var(--sans);background:none;border:1px solid var(--line);color:var(--ink);padding:.3rem .7rem;border-radius:2rem;cursor:pointer}
+.langmenu{position:relative}
+.lang-toggle{display:inline-flex;align-items:center;gap:.45rem;font:600 .85rem var(--sans);background:none;border:1px solid var(--line);color:var(--ink);padding:.35rem .7rem;border-radius:2rem;cursor:pointer}
+.flag{width:1.3rem;height:.9rem;flex:none;border-radius:2px;box-shadow:0 0 0 1px var(--line)}
+.caret{width:.6rem;height:.4rem;flex:none}
+.langlist{position:absolute;right:0;top:calc(100% + .4rem);z-index:10;min-width:10.5rem;margin:0;padding:.35rem;list-style:none;background:var(--surface);border:1px solid var(--line);border-radius:.6rem;box-shadow:0 10px 30px rgb(0 0 0/.15)}
+.langlist[hidden]{display:none}
+.langlist .lang{display:flex;align-items:center;gap:.65rem;width:100%;padding:.5rem .6rem;border:0;border-radius:.4rem;background:none;color:var(--ink);font:500 .95rem var(--sans);text-align:left;cursor:pointer}
+.langlist .lang:hover{background:var(--bg)}
+.langlist .lang[aria-current="true"]{background:var(--bg);font-weight:600}
 .hero{display:grid;grid-template-columns:1.2fr 1fr;gap:2rem;align-items:center;padding:4rem 0 5rem}
 .hero h1{font:400 clamp(3.4rem,10vw,7.5rem)/.95 var(--serif);letter-spacing:-.03em;margin:0 0 1.5rem}
 .hero h1 small{display:block;font:italic 400 clamp(1.3rem,3vw,2rem)/1.2 var(--serif);letter-spacing:0;color:var(--muted);margin-bottom:.6rem}
@@ -66,8 +74,6 @@ h2{font:400 clamp(2rem,5vw,3rem)/1.1 var(--serif);margin:0 0 1.5rem;letter-spaci
 .fill{background:var(--surface);padding:1.75rem;border-left:4px solid var(--sea)}
 .fill h3{font:600 1.4rem var(--serif);margin:0 0 .6rem}
 .fill p{margin:0 0 1rem}
-.lang[aria-pressed="true"]{background:var(--olive);color:var(--on-olive);border-color:var(--olive)}
-.langs{display:flex;gap:.3rem}
 .gallery{display:grid;grid-template-columns:repeat(auto-fill,minmax(15rem,1fr));gap:1rem}
 .tile{aspect-ratio:4/3;background:var(--surface);border:1px dashed var(--line);display:grid;place-items:center;overflow:hidden}
 .tile::before{content:"";width:3.2rem;height:1.4rem;border-radius:50%;background:var(--leaf);opacity:.55;transform:rotate(-25deg)}
@@ -91,6 +97,12 @@ footer{padding:2.5rem 0 3rem;border-top:1px solid var(--line);color:var(--muted)
 </style>
 </head>
 <body>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <symbol id="fl-hr" viewBox="0 0 30 20" preserveAspectRatio="xMidYMid slice"><path fill="#ff0000" d="M0 0h30v6.7H0z"/><path fill="#fff" d="M0 6.7h30v6.6H0z"/><path fill="#171796" d="M0 13.3h30V20H0z"/><path fill="#fff" d="M12 4.5h6v6.6a3 3 0 0 1-6 0z"/><clipPath id="fl-hr-c"><path d="M12.5 5h5v6.1a2.5 2.5 0 0 1-5 0z"/></clipPath><g clip-path="url(#fl-hr-c)"><rect x="12.5" y="5" width="1" height="1" fill="#ff0000"/><rect x="13.5" y="5" width="1" height="1" fill="#fff"/><rect x="14.5" y="5" width="1" height="1" fill="#ff0000"/><rect x="15.5" y="5" width="1" height="1" fill="#fff"/><rect x="16.5" y="5" width="1" height="1" fill="#ff0000"/><rect x="12.5" y="6" width="1" height="1" fill="#fff"/><rect x="13.5" y="6" width="1" height="1" fill="#ff0000"/><rect x="14.5" y="6" width="1" height="1" fill="#fff"/><rect x="15.5" y="6" width="1" height="1" fill="#ff0000"/><rect x="16.5" y="6" width="1" height="1" fill="#fff"/><rect x="12.5" y="7" width="1" height="1" fill="#ff0000"/><rect x="13.5" y="7" width="1" height="1" fill="#fff"/><rect x="14.5" y="7" width="1" height="1" fill="#ff0000"/><rect x="15.5" y="7" width="1" height="1" fill="#fff"/><rect x="16.5" y="7" width="1" height="1" fill="#ff0000"/><rect x="12.5" y="8" width="1" height="1" fill="#fff"/><rect x="13.5" y="8" width="1" height="1" fill="#ff0000"/><rect x="14.5" y="8" width="1" height="1" fill="#fff"/><rect x="15.5" y="8" width="1" height="1" fill="#ff0000"/><rect x="16.5" y="8" width="1" height="1" fill="#fff"/><rect x="12.5" y="9" width="1" height="1" fill="#ff0000"/><rect x="13.5" y="9" width="1" height="1" fill="#fff"/><rect x="14.5" y="9" width="1" height="1" fill="#ff0000"/><rect x="15.5" y="9" width="1" height="1" fill="#fff"/><rect x="16.5" y="9" width="1" height="1" fill="#ff0000"/><rect x="12.5" y="10" width="1" height="1" fill="#fff"/><rect x="13.5" y="10" width="1" height="1" fill="#ff0000"/><rect x="14.5" y="10" width="1" height="1" fill="#fff"/><rect x="15.5" y="10" width="1" height="1" fill="#ff0000"/><rect x="16.5" y="10" width="1" height="1" fill="#fff"/></g></symbol>
+  <symbol id="fl-gb" viewBox="0 0 60 30" preserveAspectRatio="xMidYMid slice"><clipPath id="fl-gb-c"><path d="M30 15h30v15zv15H0zH0V0zV0h30z"/></clipPath><path fill="#012169" d="M0 0h60v30H0z"/><path stroke="#fff" stroke-width="6" d="M0 0l60 30m0-30L0 30"/><path stroke="#c8102e" stroke-width="4" clip-path="url(#fl-gb-c)" d="M0 0l60 30m0-30L0 30"/><path stroke="#fff" stroke-width="10" d="M30 0v30M0 15h60"/><path stroke="#c8102e" stroke-width="6" d="M30 0v30M0 15h60"/></symbol>
+  <symbol id="fl-de" viewBox="0 0 30 20" preserveAspectRatio="xMidYMid slice"><path d="M0 0h30v6.7H0z"/><path fill="#dd0000" d="M0 6.7h30v6.6H0z"/><path fill="#ffce00" d="M0 13.3h30V20H0z"/></symbol>
+  <symbol id="fl-it" viewBox="0 0 30 20" preserveAspectRatio="xMidYMid slice"><path fill="#009246" d="M0 0h10v20H0z"/><path fill="#fff" d="M10 0h10v20H10z"/><path fill="#ce2b37" d="M20 0h10v20H20z"/></symbol>
+</svg>
 <div class="wrap">
   <header class="top">
     <a class="brand" href="#top">OPG Bottezar</a>
@@ -99,7 +111,15 @@ footer{padding:2.5rem 0 3rem;border-top:1px solid var(--line);color:var(--muted)
       <a href="#products" data-hr="Proizvodi" data-en="Products">Proizvodi</a>
       <a href="#gallery" data-hr="Galerija" data-en="Gallery">Galerija</a>
       <a href="#contact" data-hr="Kontakt" data-en="Contact">Kontakt</a>
-      <span class="langs" role="group" aria-label="Language"><button class="lang" type="button" data-l="hr">HR</button><button class="lang" type="button" data-l="en">EN</button><button class="lang" type="button" data-l="de">DE</button></span>
+      <div class="langmenu">
+        <button class="lang-toggle" type="button" aria-haspopup="true" aria-expanded="false" aria-controls="langlist" aria-label="Jezik / Language"><svg class="flag" aria-hidden="true"><use href="#fl-hr"/></svg><span class="lang-code">HR</span><svg class="caret" viewBox="0 0 10 6" aria-hidden="true"><path d="M1 1l4 4 4-4" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+        <ul class="langlist" id="langlist" hidden>
+          <li><button class="lang" type="button" data-l="hr" lang="hr"><svg class="flag" aria-hidden="true"><use href="#fl-hr"/></svg>Hrvatski</button></li>
+          <li><button class="lang" type="button" data-l="en" lang="en"><svg class="flag" aria-hidden="true"><use href="#fl-gb"/></svg>English</button></li>
+          <li><button class="lang" type="button" data-l="de" lang="de"><svg class="flag" aria-hidden="true"><use href="#fl-de"/></svg>Deutsch</button></li>
+          <li><button class="lang" type="button" data-l="it" lang="it"><svg class="flag" aria-hidden="true"><use href="#fl-it"/></svg>Italiano</button></li>
+        </ul>
+      </div>
     </nav>
   </header>
 
@@ -194,18 +214,25 @@ footer{padding:2.5rem 0 3rem;border-top:1px solid var(--line);color:var(--muted)
 </div>
 <script>
 (function(){
-  var btns=document.querySelectorAll('.lang'),cur='hr',DE={'O nama':'Über uns','Proizvodi':'Produkte','Galerija':'Galerie','Kontakt':'Kontakt','Obiteljsko poljoprivredno gospodarstvo · Vranje Selo kraj Vižinade':'Landwirtschaftlicher Familienbetrieb · Vranje Selo bei Vižinada','Ekstra djevičansko maslinovo ulje iz naših nasada u Istri. Isto ulje koje koristimo i sami.':'Natives Olivenöl extra aus unseren Hainen in Istrien. Dasselbe Öl, das wir selbst verwenden.','Naša zemlja':'Unser Land','Naše gospodarstvo nalazi se u Vranjem Selu kraj Vižinade. Bavimo se uzgojem maslina i proizvodnjom maslinovog ulja. U nasadima su zastupljene sorte leccino, pendolino i istarska bjelica.':'Unser Betrieb liegt in Vranje Selo bei Vižinada. Wir bauen Oliven an und stellen Olivenöl her. In unseren Hainen wachsen die Sorten Leccino, Pendolino und Istarska bjelica.','Ekstra djevičansko ulje izrađujemo najprije za našu obitelj i prijatelje, a višak prodajemo. Kupujete isto ulje koje i sami konzumiramo.':'Unser natives Olivenöl extra machen wir zuerst für unsere Familie und Freunde, den Überschuss verkaufen wir. Sie kaufen dasselbe Öl, das wir selbst essen.','Kvalitetu potvrđujemo na smotrama ulja: zlatna medalja na Maslini u Splitu 2017. i srebrna medalja na Oleum olivarumu u Krasici.':'Unsere Qualität bestätigen wir bei Olivenöl-Wettbewerben: Goldmedaille bei der Maslina in Split 2017 und Silbermedaille bei Oleum olivarum in Krasica.','Extra djevičansko ulje, mješane sorte':'Natives Olivenöl extra, Sortenmischung','Ulje od više sorti iz naših nasada.':'Öl aus mehreren Sorten aus unseren Hainen.','Extra djevičansko ulje, istarska bjelica':'Natives Olivenöl extra, Istarska bjelica','Monosortno ulje od istarske bjelice, autohtone istarske sorte.':'Sortenreines Öl aus Istarska bjelica, einer einheimischen istrischen Olivensorte.','Ulje nudimo i u rinfuzi. Za cijene i dostupnost nazovite nas.':'Das Öl bieten wir auch als Fassware an. Preise und Verfügbarkeit erfragen Sie bitte telefonisch.','Više fotografija uskoro.':'Weitere Fotos folgen in Kürze.','Telefon':'Telefon','Adresa':'Adresse','Kupnja bez posrednika':'Direkt kaufen, ohne Zwischenhändler','Ulje možete kupiti izravno kod nas. Nazovite ili nam pošaljite e-mail, a mi ćemo dogovoriti preuzimanje.':'Das Öl können Sie direkt bei uns kaufen. Rufen Sie uns an oder schreiben Sie uns eine E-Mail, und wir vereinbaren die Abholung.','Pošalji e-mail':'E-Mail senden','Gdje smo':'So finden Sie uns','Otvori u Google kartama →':'In Google Maps öffnen →'};
-  try{var s=localStorage.getItem('opg-lang');if(s==='en'||s==='de')cur=s}catch(e){}
+  var toggle=document.querySelector('.lang-toggle'),list=document.getElementById('langlist'),items=list.querySelectorAll('.lang'),cur='hr',DE={'O nama':'Über uns','Proizvodi':'Produkte','Galerija':'Galerie','Kontakt':'Kontakt','Obiteljsko poljoprivredno gospodarstvo · Vranje Selo kraj Vižinade':'Landwirtschaftlicher Familienbetrieb · Vranje Selo bei Vižinada','Ekstra djevičansko maslinovo ulje iz naših nasada u Istri. Isto ulje koje koristimo i sami.':'Natives Olivenöl extra aus unseren Hainen in Istrien. Dasselbe Öl, das wir selbst verwenden.','Naša zemlja':'Unser Land','Naše gospodarstvo nalazi se u Vranjem Selu kraj Vižinade. Bavimo se uzgojem maslina i proizvodnjom maslinovog ulja. U nasadima su zastupljene sorte leccino, pendolino i istarska bjelica.':'Unser Betrieb liegt in Vranje Selo bei Vižinada. Wir bauen Oliven an und stellen Olivenöl her. In unseren Hainen wachsen die Sorten Leccino, Pendolino und Istarska bjelica.','Ekstra djevičansko ulje izrađujemo najprije za našu obitelj i prijatelje, a višak prodajemo. Kupujete isto ulje koje i sami konzumiramo.':'Unser natives Olivenöl extra machen wir zuerst für unsere Familie und Freunde, den Überschuss verkaufen wir. Sie kaufen dasselbe Öl, das wir selbst essen.','Kvalitetu potvrđujemo na smotrama ulja: zlatna medalja na Maslini u Splitu 2017. i srebrna medalja na Oleum olivarumu u Krasici.':'Unsere Qualität bestätigen wir bei Olivenöl-Wettbewerben: Goldmedaille bei der Maslina in Split 2017 und Silbermedaille bei Oleum olivarum in Krasica.','Extra djevičansko ulje, mješane sorte':'Natives Olivenöl extra, Sortenmischung','Ulje od više sorti iz naših nasada.':'Öl aus mehreren Sorten aus unseren Hainen.','Extra djevičansko ulje, istarska bjelica':'Natives Olivenöl extra, Istarska bjelica','Monosortno ulje od istarske bjelice, autohtone istarske sorte.':'Sortenreines Öl aus Istarska bjelica, einer einheimischen istrischen Olivensorte.','Ulje nudimo i u rinfuzi. Za cijene i dostupnost nazovite nas.':'Das Öl bieten wir auch als Fassware an. Preise und Verfügbarkeit erfragen Sie bitte telefonisch.','Više fotografija uskoro.':'Weitere Fotos folgen in Kürze.','Telefon':'Telefon','Adresa':'Adresse','Kupnja bez posrednika':'Direkt kaufen, ohne Zwischenhändler','Ulje možete kupiti izravno kod nas. Nazovite ili nam pošaljite e-mail, a mi ćemo dogovoriti preuzimanje.':'Das Öl können Sie direkt bei uns kaufen. Rufen Sie uns an oder schreiben Sie uns eine E-Mail, und wir vereinbaren die Abholung.','Pošalji e-mail':'E-Mail senden','Gdje smo':'So finden Sie uns','Otvori u Google kartama →':'In Google Maps öffnen →'},
+  IT={"O nama":"Chi siamo","Proizvodi":"Prodotti","Galerija":"Galleria","Kontakt":"Contatti","Obiteljsko poljoprivredno gospodarstvo · Vranje Selo kraj Vižinade":"Azienda agricola familiare · Vranje Selo vicino a Visinada","Ekstra djevičansko maslinovo ulje iz naših nasada u Istri. Isto ulje koje koristimo i sami.":"Olio extravergine di oliva dai nostri uliveti in Istria. Lo stesso olio che usiamo noi.","Naša zemlja":"La nostra terra","Naše gospodarstvo nalazi se u Vranjem Selu kraj Vižinade. Bavimo se uzgojem maslina i proizvodnjom maslinovog ulja. U nasadima su zastupljene sorte leccino, pendolino i istarska bjelica.":"La nostra azienda si trova a Vranje Selo, vicino a Visinada. Coltiviamo olive e produciamo olio d'oliva. Nei nostri uliveti crescono le varietà Leccino, Pendolino e Bianchera istriana.","Ekstra djevičansko ulje izrađujemo najprije za našu obitelj i prijatelje, a višak prodajemo. Kupujete isto ulje koje i sami konzumiramo.":"Il nostro olio extravergine lo produciamo prima di tutto per la nostra famiglia e gli amici, e vendiamo quello che avanza. Comprate lo stesso olio che consumiamo noi.","Kvalitetu potvrđujemo na smotrama ulja: zlatna medalja na Maslini u Splitu 2017. i srebrna medalja na Oleum olivarumu u Krasici.":"Confermiamo la nostra qualità ai concorsi oleari: medaglia d'oro a Maslina a Spalato nel 2017 e medaglia d'argento a Oleum olivarum a Krasica.","Extra djevičansko ulje, mješane sorte":"Olio extravergine, blend di varietà","Ulje od više sorti iz naših nasada.":"Olio da più varietà coltivate nei nostri uliveti.","Extra djevičansko ulje, istarska bjelica":"Olio extravergine, Bianchera istriana","Monosortno ulje od istarske bjelice, autohtone istarske sorte.":"Olio monovarietale di Bianchera, varietà autoctona istriana.","Ulje nudimo i u rinfuzi. Za cijene i dostupnost nazovite nas.":"L'olio è disponibile anche sfuso. Per prezzi e disponibilità chiamateci.","Više fotografija uskoro.":"Altre foto in arrivo.","Telefon":"Telefono","Adresa":"Indirizzo","Kupnja bez posrednika":"Acquisto senza intermediari","Ulje možete kupiti izravno kod nas. Nazovite ili nam pošaljite e-mail, a mi ćemo dogovoriti preuzimanje.":"Potete acquistare l'olio direttamente da noi. Chiamateci o scriveteci un'e-mail e concorderemo il ritiro.","Pošalji e-mail":"Invia e-mail","Gdje smo":"Dove siamo","Otvori u Google kartama →":"Apri in Google Maps →"};
+  try{var s=localStorage.getItem('opg-lang');if(s==='en'||s==='de'||s==='it')cur=s}catch(e){}
   function apply(){
     document.documentElement.lang=cur;
-    document.querySelectorAll('[data-hr]').forEach(function(el){var v=el.getAttribute('data-'+cur);if(cur==='de')v=DE[el.getAttribute('data-hr')]||el.getAttribute('data-en');el.textContent=v});
-    btns.forEach(function(b){b.setAttribute('aria-pressed',b.dataset.l===cur)});
+    document.querySelectorAll('[data-hr]').forEach(function(el){var v=el.getAttribute('data-'+cur),M=cur==='de'?DE:cur==='it'?IT:null;if(M)v=M[el.getAttribute('data-hr')]||el.getAttribute('data-en');el.textContent=v});
+    items.forEach(function(b){b.setAttribute('aria-current',b.dataset.l===cur)});
+    toggle.querySelector('use').setAttribute('href','#fl-'+(cur==='en'?'gb':cur));
+    toggle.querySelector('.lang-code').textContent=cur.toUpperCase();
   }
-  document.querySelector('.langs').addEventListener('click',function(e){var t=e.target.closest('.lang');if(!t)return;
+  function show(o){list.hidden=!o;toggle.setAttribute('aria-expanded',o)}
+  toggle.addEventListener('click',function(){show(list.hidden)});
+  list.addEventListener('click',function(e){var t=e.target.closest('.lang');if(!t)return;
     cur=t.dataset.l;
     try{localStorage.setItem('opg-lang',cur)}catch(e){}
-    apply();
+    apply();show(false);toggle.focus();
   });
+  document.addEventListener('click',function(e){if(!e.target.closest('.langmenu'))show(false)});
+  document.addEventListener('keydown',function(e){if(e.key==='Escape'&&!list.hidden){show(false);toggle.focus()}});
   document.getElementById('y').textContent=new Date().getFullYear();
   apply();
 })();
