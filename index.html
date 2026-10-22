@@ -4,6 +4,8 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>OPG Bottezar – Vižinada, Istra</title>
+<link rel="icon" type="image/png" href="images/favicon.png">
+<link rel="apple-touch-icon" href="images/apple-touch-icon.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,600;1,6..72,400&family=Figtree:wght@400;500;600&display=swap" rel="stylesheet">
@@ -35,7 +37,8 @@ a{color:inherit}
 :focus-visible{outline:3px solid var(--sea);outline-offset:3px}
 .wrap{max-width:68rem;margin:0 auto;padding:0 1.5rem}
 header.top{display:flex;justify-content:space-between;align-items:center;padding:1.25rem 0;gap:1rem}
-header.top .brand{font:600 1.1rem var(--serif);text-decoration:none}
+header.top .brand{font:600 1.1rem var(--serif);text-decoration:none;display:inline-flex;align-items:center;gap:.6rem}
+.mark{width:1.74rem;height:2.4rem;flex:none;background:var(--olive);-webkit-mask:url(images/logo-mark.png) center/contain no-repeat;mask:url(images/logo-mark.png) center/contain no-repeat}
 nav{display:flex;gap:1.5rem;align-items:center;flex-wrap:wrap}
 nav a{text-decoration:none;font-weight:500;font-size:.95rem}
 nav a:hover{text-decoration:underline}
@@ -93,7 +96,7 @@ footer{padding:2.5rem 0 3rem;border-top:1px solid var(--line);color:var(--muted)
 <body>
 <div class="wrap">
   <header class="top">
-    <a class="brand" href="#top">OPG Bottezar</a>
+    <a class="brand" href="#top"><span class="mark" aria-hidden="true"></span>OPG Bottezar</a>
     <nav>
       <a href="#about" data-hr="O nama" data-en="About">O nama</a>
       <a href="#products" data-hr="Proizvodi" data-en="Products">Proizvodi</a>
