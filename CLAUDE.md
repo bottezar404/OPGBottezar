@@ -1,8 +1,9 @@
 # OPG Bottezar website
 
 Single-page site for OPG Bottezar (olive oil, Vranje Selo near Vižinada, Istria).
-Everything lives in `index.html`. It is published with GitHub Pages from `main`:
-https://bottezar404.github.io/OPGBottezar/
+Everything lives in `index.html`. It is published with GitHub Pages from `main`
+at the custom domain set in `CNAME`:
+https://opgbottezar.com
 
 ## How to make changes
 
