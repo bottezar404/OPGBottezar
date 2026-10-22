@@ -77,12 +77,10 @@ h2{font:400 clamp(2rem,5vw,3rem)/1.1 var(--serif);margin:0 0 1.5rem;letter-spaci
 .fill{background:var(--surface);padding:1.75rem;border-left:4px solid var(--sea)}
 .fill h3{font:600 1.4rem var(--serif);margin:0 0 .6rem}
 .fill p{margin:0 0 1rem}
-.gallery{display:grid;grid-template-columns:repeat(auto-fill,minmax(15rem,1fr));gap:1rem}
-.tile{aspect-ratio:4/3;background:var(--surface);border:1px dashed var(--line);display:grid;place-items:center;overflow:hidden}
-.tile::before{content:"";width:3.2rem;height:1.4rem;border-radius:50%;background:var(--leaf);opacity:.55;transform:rotate(-25deg)}
+.gallery{display:grid;grid-template-columns:repeat(4,1fr);gap:1rem}
+.tile{display:block;aspect-ratio:1;overflow:hidden;background:var(--surface)}
+.tile.big{grid-column:span 2;grid-row:span 2}
 .tile img{width:100%;height:100%;object-fit:cover;display:block}
-.tile.photo{border-style:solid}
-.tile.photo::before{display:none}
 #location{border-top:1px solid var(--line)}
 .map{display:block;width:100%;aspect-ratio:16/9;min-height:18rem;border:1px solid var(--line);background:var(--surface)}
 .map-link{display:inline-block;margin-top:1rem;color:var(--sea);font-weight:600;text-underline-offset:3px}
@@ -92,6 +90,7 @@ footer{padding:2.5rem 0 3rem;border-top:1px solid var(--line);color:var(--muted)
   .hero{padding:2rem 0 3rem}
   .branch{max-height:14rem;order:-1}
   .rows li{grid-template-columns:1fr;gap:.4rem}
+  .gallery{grid-template-columns:repeat(2,1fr);gap:.6rem}
 }
 @media (prefers-reduced-motion:no-preference){
   .branch .leaf{transform-origin:var(--ox) var(--oy);animation:sway 7s ease-in-out infinite alternate}
@@ -180,10 +179,12 @@ footer{padding:2.5rem 0 3rem;border-top:1px solid var(--line);color:var(--muted)
   <section id="gallery">
     <h2 data-hr="Galerija" data-en="Gallery">Galerija</h2>
     <div class="gallery">
-      <div class="tile photo"><img src="images/bottezar-ulje-masline.jpg" width="1600" height="1600" loading="lazy" alt="Bottezar ekstra djevičansko maslinovo ulje među zelenim i crnim maslinama"></div><div class="tile"></div><div class="tile"></div>
-      <div class="tile"></div><div class="tile"></div><div class="tile"></div>
+      <a class="tile big" href="images/bottezar-ulje-masline.jpg"><img src="images/bottezar-ulje-masline.jpg" width="1600" height="1600" loading="lazy" alt="Bottezar ekstra djevičansko maslinovo ulje među zelenim i crnim maslinama"></a>
+      <a class="tile" href="images/berba-traktor.jpg"><img src="images/berba-traktor.jpg" width="1125" height="1500" loading="lazy" alt="Berba maslina: mreže s plodovima i traktor u maslinjaku"></a>
+      <a class="tile" href="images/masline-na-mrezi.jpg"><img src="images/masline-na-mrezi.jpg" width="844" height="1125" loading="lazy" alt="Ubrane zelene i crne masline na mreži"></a>
+      <a class="tile" href="images/zelene-masline.jpg"><img src="images/zelene-masline.jpg" width="1200" height="1600" loading="lazy" alt="Zelene masline na grani"></a>
+      <a class="tile" href="images/zrele-masline.jpg"><img src="images/zrele-masline.jpg" width="1200" height="1600" loading="lazy" alt="Masline koje dozrijevaju, od zelene do ljubičaste boje"></a>
     </div>
-    <p class="note" data-hr="Više fotografija uskoro." data-en="More photos coming soon.">Više fotografija uskoro.</p>
   </section>
 
   <section id="contact" class="contact">
