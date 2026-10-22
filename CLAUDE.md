@@ -2,7 +2,7 @@
 
 Single-page site for OPG Bottezar (olive oil, Vranje Selo near Vižinada, Istria).
 Everything lives in `index.html`. It is published with GitHub Pages from `main`:
-https://p1nod0x.github.io/OPGBottezar/
+https://bottezar404.github.io/OPGBottezar/
 
 ## How to make changes
 
