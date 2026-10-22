@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="hr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>OPG Bottezar – Vižinada, Istra</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,600;1,6..72,400&family=Figtree:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#E8ECE3; --surface:#F3F5F0; --ink:#1F2A17; --muted:#56624B; --line:#C5CDBB;
+  --olive:#34421F; --leaf:#8C9B70; --sea:#2B5D78; --on-olive:#EEF1E8;
+  --serif:"Newsreader",Georgia,"Times New Roman",serif;
+  --sans:"Figtree",system-ui,-apple-system,"Segoe UI",sans-serif;
+  color-scheme:light;
+  box-sizing:border-box;
+  padding-top:env(safe-area-inset-top,0px);
+  padding-bottom:env(safe-area-inset-bottom,0px);
+}
+@media (prefers-color-scheme:dark){
+  :root:not([data-theme="light"]){
+    --bg:#141a0f; --surface:#1c2415; --ink:#E6EADB; --muted:#A3AF92; --line:#34402a;
+    --olive:#C9D6A6; --leaf:#7d8c60; --sea:#7FB4D0; --on-olive:#141a0f; color-scheme:dark;
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#141a0f; --surface:#1c2415; --ink:#E6EADB; --muted:#A3AF92; --line:#34402a;
+  --olive:#C9D6A6; --leaf:#7d8c60; --sea:#7FB4D0; --on-olive:#141a0f; color-scheme:dark;
+}
+html{scroll-padding-top:env(safe-area-inset-top,0px);scroll-behavior:smooth}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font:400 1.0625rem/1.65 var(--sans)}
+a{color:inherit}
+:focus-visible{outline:3px solid var(--sea);outline-offset:3px}
+.wrap{max-width:68rem;margin:0 auto;padding:0 1.5rem}
+header.top{display:flex;justify-content:space-between;align-items:center;padding:1.25rem 0;gap:1rem}
+header.top .brand{font:600 1.1rem var(--serif);text-decoration:none}
+nav{display:flex;gap:1.5rem;align-items:center;flex-wrap:wrap}
+nav a{text-decoration:none;font-weight:500;font-size:.95rem}
+nav a:hover{text-decoration:underline}
+.lang{font:600 .85rem var(--sans);background:none;border:1px solid var(--line);color:var(--ink);padding:.3rem .7rem;border-radius:2rem;cursor:pointer}
+.hero{display:grid;grid-template-columns:1.2fr 1fr;gap:2rem;align-items:center;padding:4rem 0 5rem}
+.hero h1{font:400 clamp(3.4rem,10vw,7.5rem)/.95 var(--serif);letter-spacing:-.03em;margin:0 0 1.5rem}
+.hero h1 small{display:block;font:italic 400 clamp(1.3rem,3vw,2rem)/1.2 var(--serif);letter-spacing:0;color:var(--muted);margin-bottom:.6rem}
+.hero p{max-width:30rem;font-size:1.2rem;color:var(--muted);margin:0 0 2rem}
+.btn{display:inline-block;background:var(--olive);color:var(--on-olive);padding:.85rem 1.6rem;border-radius:.4rem;font-weight:600;text-decoration:none}
+.btn:hover{filter:brightness(1.1)}
+.branch{width:100%;height:auto;max-height:26rem}
+section{padding:4.5rem 0;border-top:1px solid var(--line)}
+h2{font:400 clamp(2rem,5vw,3rem)/1.1 var(--serif);margin:0 0 1.5rem;letter-spacing:-.01em}
+.about{display:grid;grid-template-columns:1fr 1.4fr;gap:3rem}
+.about p{margin:0 0 1.1rem;max-width:38rem}
+.rows{list-style:none;margin:0;padding:0}
+.rows li{display:grid;grid-template-columns:1fr 2fr auto;gap:1.5rem;padding:1.5rem 0;border-bottom:1px solid var(--line);align-items:baseline}
+.rows li:first-child{border-top:1px solid var(--line)}
+.rows h3{font:600 1.5rem var(--serif);margin:0}
+.rows p{margin:0;color:var(--muted)}
+.rows .size{font-weight:600;white-space:nowrap}
+.note{color:var(--muted);font-size:.95rem;margin-top:1.25rem}
+.contact{display:grid;grid-template-columns:1fr 1fr;gap:3rem}
+.contact dl{margin:0}
+.contact dt{font-weight:600;margin-top:1.2rem}
+.contact dd{margin:.15rem 0 0;color:var(--muted)}
+.contact a{color:var(--sea);text-underline-offset:3px}
+.fill{background:var(--surface);padding:1.75rem;border-left:4px solid var(--sea)}
+.fill h3{font:600 1.4rem var(--serif);margin:0 0 .6rem}
+.fill p{margin:0 0 1rem}
+.lang[aria-pressed="true"]{background:var(--olive);color:var(--on-olive);border-color:var(--olive)}
+.langs{display:flex;gap:.3rem}
+.gallery{display:grid;grid-template-columns:repeat(auto-fill,minmax(15rem,1fr));gap:1rem}
+.tile{aspect-ratio:4/3;background:var(--surface);border:1px dashed var(--line);display:grid;place-items:center;overflow:hidden}
+.tile::before{content:"";width:3.2rem;height:1.4rem;border-radius:50%;background:var(--leaf);opacity:.55;transform:rotate(-25deg)}
+.tile img{width:100%;height:100%;object-fit:cover;display:block}
+footer{padding:2.5rem 0 3rem;border-top:1px solid var(--line);color:var(--muted);font-size:.9rem}
+@media (max-width:760px){
+  .hero,.about,.contact{grid-template-columns:1fr}
+  .hero{padding:2rem 0 3rem}
+  .branch{max-height:14rem;order:-1}
+  .rows li{grid-template-columns:1fr;gap:.4rem}
+}
+@media (prefers-reduced-motion:no-preference){
+  .branch .leaf{transform-origin:var(--ox) var(--oy);animation:sway 7s ease-in-out infinite alternate}
+  @keyframes sway{to{transform:rotate(3deg)}}
+}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header class="top">
+    <a class="brand" href="#top">OPG Bottezar</a>
+    <nav>
+      <a href="#about" data-hr="O nama" data-en="About">O nama</a>
+      <a href="#products" data-hr="Proizvodi" data-en="Products">Proizvodi</a>
+      <a href="#gallery" data-hr="Galerija" data-en="Gallery">Galerija</a>
+      <a href="#contact" data-hr="Kontakt" data-en="Contact">Kontakt</a>
+      <span class="langs" role="group" aria-label="Language"><button class="lang" type="button" data-l="hr">HR</button><button class="lang" type="button" data-l="en">EN</button><button class="lang" type="button" data-l="de">DE</button></span>
+    </nav>
+  </header>
+
+  <main id="top">
+    <div class="hero">
+      <div>
+        <h1><small data-hr="Obiteljsko poljoprivredno gospodarstvo · Vranje Selo kraj Vižinade" data-en="Family farm · Vranje Selo near Vižinada">Obiteljsko poljoprivredno gospodarstvo · Vranje Selo kraj Vižinade</small>Bottezar</h1>
+        <p data-hr="Ekstra djevičansko maslinovo ulje iz naših nasada u Istri. Isto ulje koje koristimo i sami." data-en="Extra virgin olive oil from our groves in Istria. The same oil we use ourselves.">Ekstra djevičansko maslinovo ulje iz naših nasada u Istri. Isto ulje koje koristimo i sami.</p>
+      </div>
+      <svg class="branch" viewBox="0 0 400 420" role="img" aria-label="Maslinova grančica / Olive branch">
+        <path d="M200 410 C190 300 215 210 170 90" fill="none" stroke="var(--olive)" stroke-width="5" stroke-linecap="round"/>
+        <g fill="var(--leaf)">
+          <ellipse class="leaf" style="--ox:200px;--oy:340px" cx="250" cy="330" rx="46" ry="12" transform="rotate(-28 250 330)"/>
+          <ellipse class="leaf" style="--ox:200px;--oy:340px" cx="146" cy="300" rx="46" ry="12" transform="rotate(28 146 300)"/>
+          <ellipse class="leaf" style="--ox:205px;--oy:250px" cx="256" cy="236" rx="44" ry="11" transform="rotate(-30 256 236)"/>
+          <ellipse class="leaf" style="--ox:195px;--oy:230px" cx="140" cy="206" rx="44" ry="11" transform="rotate(30 140 206)"/>
+          <ellipse class="leaf" style="--ox:185px;--oy:160px" cx="236" cy="140" rx="40" ry="10" transform="rotate(-32 236 140)"/>
+          <ellipse class="leaf" style="--ox:175px;--oy:130px" cx="118" cy="116" rx="40" ry="10" transform="rotate(32 118 116)"/>
+          <ellipse class="leaf" style="--ox:170px;--oy:90px" cx="172" cy="62" rx="38" ry="10" transform="rotate(-85 172 62)"/>
+        </g>
+        <g fill="var(--olive)">
+          <ellipse cx="206" cy="282" rx="13" ry="17"/>
+          <ellipse cx="184" cy="178" rx="12" ry="16"/>
+        </g>
+      </svg>
+    </div>
+  </main>
+
+  <section id="about" class="about">
+    <h2 data-hr="Naša zemlja" data-en="Our land">Naša zemlja</h2>
+    <div>
+      <p data-hr="Naše gospodarstvo nalazi se u Vranjem Selu kraj Vižinade. Bavimo se uzgojem maslina i proizvodnjom maslinovog ulja. U nasadima su zastupljene sorte leccino, pendolino i istarska bjelica." data-en="Our farm is in Vranje Selo near Vižinada. We grow olives and make olive oil. Our groves are planted with Leccino, Pendolino and Istarska bjelica.">Naše gospodarstvo nalazi se u Vranjem Selu kraj Vižinade. Bavimo se uzgojem maslina i proizvodnjom maslinovog ulja. U nasadima su zastupljene sorte leccino, pendolino i istarska bjelica.</p>
+      <p data-hr="Ekstra djevičansko ulje izrađujemo najprije za našu obitelj i prijatelje, a višak prodajemo. Kupujete isto ulje koje i sami konzumiramo." data-en="We make our extra virgin oil first for our family and friends, and sell the surplus. You are buying the same oil we eat ourselves.">Ekstra djevičansko ulje izrađujemo najprije za našu obitelj i prijatelje, a višak prodajemo. Kupujete isto ulje koje i sami konzumiramo.</p>
+      <p data-hr="Kvalitetu potvrđujemo na smotrama ulja: zlatna medalja na Maslini u Splitu 2017. i srebrna medalja na Oleum olivarumu u Krasici." data-en="We test our quality at oil competitions: a gold medal at Maslina in Split in 2017 and a silver medal at Oleum olivarum in Krasica.">Kvalitetu potvrđujemo na smotrama ulja: zlatna medalja na Maslini u Splitu 2017. i srebrna medalja na Oleum olivarumu u Krasici.</p>
+    </div>
+  </section>
+
+  <section id="products">
+    <h2 data-hr="Proizvodi" data-en="Products">Proizvodi</h2>
+    <ul class="rows">
+      <li>
+        <h3 data-hr="Extra djevičansko ulje, mješane sorte" data-en="Extra virgin oil, blended varieties">Extra djevičansko ulje, mješane sorte</h3>
+        <p data-hr="Ulje od više sorti iz naših nasada." data-en="Oil from several varieties grown in our groves.">Ulje od više sorti iz naših nasada.</p>
+        <span class="size">0,5 l · 0,75 l · 1 l</span>
+      </li>
+      <li>
+        <h3 data-hr="Extra djevičansko ulje, istarska bjelica" data-en="Extra virgin oil, Istarska bjelica">Extra djevičansko ulje, istarska bjelica</h3>
+        <p data-hr="Monosortno ulje od istarske bjelice, autohtone istarske sorte." data-en="Single-variety oil from Istarska bjelica, a native Istrian olive.">Monosortno ulje od istarske bjelice, autohtone istarske sorte.</p>
+        <span class="size">0,5 l · 0,75 l · 1 l</span>
+      </li>
+    </ul>
+    <p class="note" data-hr="Ulje nudimo i u rinfuzi. Za cijene i dostupnost nazovite nas." data-en="Oil is also available in bulk. Call us for prices and availability.">Ulje nudimo i u rinfuzi. Za cijene i dostupnost nazovite nas.</p>
+  </section>
+
+  <section id="gallery">
+    <h2 data-hr="Galerija" data-en="Gallery">Galerija</h2>
+    <div class="gallery">
+      <div class="tile"></div><div class="tile"></div><div class="tile"></div>
+      <div class="tile"></div><div class="tile"></div><div class="tile"></div>
+    </div>
+    <p class="note" data-hr="Fotografije uskoro." data-en="Photos coming soon.">Fotografije uskoro.</p>
+  </section>
+
+  <section id="contact" class="contact">
+    <div>
+      <h2 data-hr="Kontakt" data-en="Contact">Kontakt</h2>
+      <dl>
+        <dt data-hr="Telefon" data-en="Phone">Telefon</dt>
+        <dd><a href="tel:+38552446270">+385 52 446 270</a></dd>
+        <dt>E-mail</dt>
+        <dd><a href="mailto:opg.bottezar@gmail.com">opg.bottezar@gmail.com</a></dd>
+        
+        
+        <dt data-hr="Adresa" data-en="Address">Adresa</dt>
+        <dd>Vranje Selo, 52447 Vižinada, Istra</dd>
+      </dl>
+    </div>
+    <div class="fill">
+      <h3 data-hr="Kupnja bez posrednika" data-en="Buy without middlemen">Kupnja bez posrednika</h3>
+      <p data-hr="Ulje možete kupiti izravno kod nas. Nazovite ili nam pošaljite e-mail, a mi ćemo dogovoriti preuzimanje." data-en="You can buy the oil directly from us. Call or email us and we will arrange pickup.">Ulje možete kupiti izravno kod nas. Nazovite ili nam pošaljite e-mail, a mi ćemo dogovoriti preuzimanje.</p>
+      
+    </div>
+  </section>
+
+  <footer>© <span id="y">2026</span> OPG Bottezar · Vižinada, Istra</footer>
+</div>
+<script>
+(function(){
+  var btns=document.querySelectorAll('.lang'),cur='hr',DE={'O nama':'Über uns','Proizvodi':'Produkte','Galerija':'Galerie','Kontakt':'Kontakt','Obiteljsko poljoprivredno gospodarstvo · Vranje Selo kraj Vižinade':'Landwirtschaftlicher Familienbetrieb · Vranje Selo bei Vižinada','Ekstra djevičansko maslinovo ulje iz naših nasada u Istri. Isto ulje koje koristimo i sami.':'Natives Olivenöl extra aus unseren Hainen in Istrien. Dasselbe Öl, das wir selbst verwenden.','Naša zemlja':'Unser Land','Naše gospodarstvo nalazi se u Vranjem Selu kraj Vižinade. Bavimo se uzgojem maslina i proizvodnjom maslinovog ulja. U nasadima su zastupljene sorte leccino, pendolino i istarska bjelica.':'Unser Betrieb liegt in Vranje Selo bei Vižinada. Wir bauen Oliven an und stellen Olivenöl her. In unseren Hainen wachsen die Sorten Leccino, Pendolino und Istarska bjelica.','Ekstra djevičansko ulje izrađujemo najprije za našu obitelj i prijatelje, a višak prodajemo. Kupujete isto ulje koje i sami konzumiramo.':'Unser natives Olivenöl extra machen wir zuerst für unsere Familie und Freunde, den Überschuss verkaufen wir. Sie kaufen dasselbe Öl, das wir selbst essen.','Kvalitetu potvrđujemo na smotrama ulja: zlatna medalja na Maslini u Splitu 2017. i srebrna medalja na Oleum olivarumu u Krasici.':'Unsere Qualität bestätigen wir bei Olivenöl-Wettbewerben: Goldmedaille bei der Maslina in Split 2017 und Silbermedaille bei Oleum olivarum in Krasica.','Extra djevičansko ulje, mješane sorte':'Natives Olivenöl extra, Sortenmischung','Ulje od više sorti iz naših nasada.':'Öl aus mehreren Sorten aus unseren Hainen.','Extra djevičansko ulje, istarska bjelica':'Natives Olivenöl extra, Istarska bjelica','Monosortno ulje od istarske bjelice, autohtone istarske sorte.':'Sortenreines Öl aus Istarska bjelica, einer einheimischen istrischen Olivensorte.','Ulje nudimo i u rinfuzi. Za cijene i dostupnost nazovite nas.':'Das Öl bieten wir auch als Fassware an. Preise und Verfügbarkeit erfragen Sie bitte telefonisch.','Fotografije uskoro.':'Fotos folgen in Kürze.','Telefon':'Telefon','Adresa':'Adresse','Kupnja bez posrednika':'Direkt kaufen, ohne Zwischenhändler','Ulje možete kupiti izravno kod nas. Nazovite ili nam pošaljite e-mail, a mi ćemo dogovoriti preuzimanje.':'Das Öl können Sie direkt bei uns kaufen. Rufen Sie uns an oder schreiben Sie uns eine E-Mail, und wir vereinbaren die Abholung.','Pošalji e-mail':'E-Mail senden'};
+  try{var s=localStorage.getItem('opg-lang');if(s==='en'||s==='de')cur=s}catch(e){}
+  function apply(){
+    document.documentElement.lang=cur;
+    document.querySelectorAll('[data-hr]').forEach(function(el){var v=el.getAttribute('data-'+cur);if(cur==='de')v=DE[el.getAttribute('data-hr')]||el.getAttribute('data-en');el.textContent=v});
+    btns.forEach(function(b){b.setAttribute('aria-pressed',b.dataset.l===cur)});
+  }
+  document.querySelector('.langs').addEventListener('click',function(e){var t=e.target.closest('.lang');if(!t)return;
+    cur=t.dataset.l;
+    try{localStorage.setItem('opg-lang',cur)}catch(e){}
+    apply();
+  });
+  document.getElementById('y').textContent=new Date().getFullYear();
+  apply();
+})();
+</script>
+</body>
+</html>
