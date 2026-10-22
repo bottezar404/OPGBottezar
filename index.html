@@ -15,6 +15,7 @@
   --olive:#34421F; --leaf:#8C9B70; --sea:#2B5D78; --on-olive:#EEF1E8;
   --serif:"Newsreader",Georgia,"Times New Roman",serif;
   --sans:"Figtree",system-ui,-apple-system,"Segoe UI",sans-serif;
+  --scrim:rgb(12 15 9/.95); --on-scrim:#fff;
   color-scheme:light;
   box-sizing:border-box;
   padding-top:env(safe-area-inset-top,0px);
@@ -86,6 +87,20 @@ h2{font:400 clamp(2rem,5vw,3rem)/1.1 var(--serif);margin:0 0 1.5rem;letter-spaci
 .tile{display:block;aspect-ratio:1;overflow:hidden;background:var(--surface)}
 .tile.big{grid-column:span 2;grid-row:span 2}
 .tile img{width:100%;height:100%;object-fit:cover;display:block}
+.viewer{width:100vw;height:100dvh;max-width:none;max-height:none;margin:0;padding:0;border:0;background:var(--scrim);color:var(--on-scrim)}
+.viewer[open]{display:grid;place-items:center}
+.viewer::backdrop{background:var(--scrim)}
+html:has(.viewer[open]){overflow:hidden}
+.viewer img{max-width:calc(100vw - 2rem);max-height:calc(100dvh - 8rem);object-fit:contain;user-select:none}
+.v-btn{position:fixed;display:grid;place-items:center;width:3rem;height:3rem;border:0;border-radius:50%;background:rgb(255 255 255/.14);color:var(--on-scrim);cursor:pointer}
+.v-btn:hover{background:rgb(255 255 255/.26)}
+.v-btn svg{width:1.4rem;height:1.4rem}
+.v-back{top:max(1rem,env(safe-area-inset-top));left:1rem}
+.v-prev,.v-next{top:50%;transform:translateY(-50%)}
+.v-prev{left:1rem}
+.v-next{right:1rem}
+.v-count{position:fixed;bottom:max(1.25rem,env(safe-area-inset-bottom));left:0;right:0;text-align:center;font:500 .9rem var(--sans);opacity:.8;pointer-events:none}
+@media (max-width:760px){.v-prev,.v-next{top:auto;transform:none;bottom:max(.75rem,env(safe-area-inset-bottom))}.v-prev{left:25%}.v-next{right:25%}.v-count{bottom:calc(max(.75rem,env(safe-area-inset-bottom)) + 1rem)}}
 #location{border-top:1px solid var(--line)}
 .map{display:block;width:100%;aspect-ratio:16/9;min-height:18rem;border:1px solid var(--line);background:var(--surface)}
 .map-link{display:inline-block;margin-top:1rem;color:var(--sea);font-weight:600;text-underline-offset:3px}
@@ -229,6 +244,14 @@ footer{padding:2.5rem 0 3rem;border-top:1px solid var(--line);color:var(--muted)
     <a class="map-link" href="https://www.google.com/maps/search/?api=1&amp;query=OPG+Bottezar,+Vranje+Selo+29,+52447+Vi%C5%BEinada,+Croatia" target="_blank" rel="noopener" data-hr="Otvori u Google kartama →" data-en="Open in Google Maps →">Otvori u Google kartama →</a>
   </section>
 
+  <dialog class="viewer" id="viewer" aria-label="Fotografija / Photo">
+    <img alt="">
+    <button class="v-btn v-back" type="button" aria-label="Natrag / Back"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M19 12H5M11 6l-6 6 6 6" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+    <button class="v-btn v-prev" type="button" aria-label="Prethodna / Previous"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15 6l-6 6 6 6" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+    <button class="v-btn v-next" type="button" aria-label="Sljedeća / Next"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 6l6 6-6 6" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+    <div class="v-count" aria-live="polite"></div>
+  </dialog>
+
   <footer>© <span id="y">2026</span> OPG Bottezar · Vižinada, Istra</footer>
 </div>
 <script>
@@ -260,6 +283,27 @@ footer{padding:2.5rem 0 3rem;border-top:1px solid var(--line);color:var(--muted)
     else if(links.classList.contains('open')){menu(false);menuBtn.focus()}
   });
   document.getElementById('y').textContent=new Date().getFullYear();
+
+  // Photo viewer: a full-screen dialog with a back arrow. Opening it adds a history entry,
+  // so the phone's back button/gesture closes the photo instead of leaving the page.
+  var viewer=document.getElementById('viewer'),vImg=viewer.querySelector('img'),vCount=viewer.querySelector('.v-count'),
+    tiles=[].slice.call(document.querySelectorAll('.gallery .tile')),vi=0,tx=null;
+  function photo(i){vi=(i+tiles.length)%tiles.length;var im=tiles[vi].querySelector('img');
+    vImg.src=im.src;vImg.alt=im.alt;vCount.textContent=(vi+1)+' / '+tiles.length}
+  document.querySelector('.gallery').addEventListener('click',function(e){var t=e.target.closest('.tile');if(!t||!viewer.showModal)return;
+    e.preventDefault();photo(tiles.indexOf(t));
+    if(!viewer.open){viewer.showModal();history.pushState({viewer:1},'')}
+  });
+  viewer.addEventListener('close',function(){if(history.state&&history.state.viewer)history.back()});
+  window.addEventListener('popstate',function(){if(viewer.open)viewer.close()});
+  viewer.querySelector('.v-back').addEventListener('click',function(){viewer.close()});
+  viewer.querySelector('.v-prev').addEventListener('click',function(){photo(vi-1)});
+  viewer.querySelector('.v-next').addEventListener('click',function(){photo(vi+1)});
+  viewer.addEventListener('click',function(e){if(e.target===viewer)viewer.close()});
+  viewer.addEventListener('keydown',function(e){if(e.key==='ArrowLeft')photo(vi-1);if(e.key==='ArrowRight')photo(vi+1)});
+  viewer.addEventListener('touchstart',function(e){tx=e.touches[0].clientX},{passive:true});
+  viewer.addEventListener('touchend',function(e){if(tx===null)return;var dx=e.changedTouches[0].clientX-tx;tx=null;
+    if(Math.abs(dx)>50)photo(dx<0?vi+1:vi-1)});
   apply();
 })();
 </script>
