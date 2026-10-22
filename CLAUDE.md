@@ -17,7 +17,9 @@ https://opgbottezar.com
 
 ## Page notes
 
-- Text is translated HR / EN / DE. Elements carry `data-hr` and `data-en` attributes;
-  German strings live in the `DE` map in the script at the bottom, keyed by the Croatian text.
-  When adding or changing text, update all three languages.
+- Text is translated HR / EN / DE / IT. Elements carry `data-hr` and `data-en` attributes;
+  German and Italian strings live in the `DE` and `IT` maps in the script at the bottom,
+  keyed by the Croatian text. When adding or changing text, update all four languages.
+- The language picker is a dropdown with flags (inline SVG symbols `#fl-hr`, `#fl-gb`,
+  `#fl-de`, `#fl-it` at the top of `<body>`); a new language needs a flag, a menu item and a map.
 - Colors are CSS variables on `:root`, with a dark-mode set; reuse them rather than hard-coding colors.
