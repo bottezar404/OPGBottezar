@@ -125,19 +125,22 @@ footer{padding:2.5rem 0 3rem;border-top:1px solid var(--line);color:var(--muted)
 @media (prefers-reduced-motion:no-preference){
   /* The branch from the label grows in (stem, then leaves unfold, then olives drop in),
      then keeps moving gently: the bough sways from its tip, leaves flutter, olives swing.
-     Entrance uses `scale`/`translate`, the idle motion uses `rotate`, so they don't clash. */
-  .branch .bough{transform-origin:232px 40px;animation:bough-sway 9s ease-in-out 2.4s infinite alternate}
+     Entrance uses `scale`/`translate`, the idle motion uses `rotate`, so they don't clash.
+     Each idle loop starts and ends at 0deg, where the entrance leaves off, and follows a
+     sine-like curve (ease-out to the first peak, ease-in-out between peaks, ease-in back),
+     so there is no jump when it starts and no pause as it passes the middle. */
+  .branch .bough{transform-origin:232px 40px;animation:bough-sway 18s 2.6s infinite}
   .branch .stem{opacity:0;animation:fade-in .7s ease-out .1s forwards}
   .branch .leaf,.branch .fruit{transform-origin:var(--ox) var(--oy)}
-  .branch .leaf{scale:0;animation:unfold .7s cubic-bezier(.3,1.4,.6,1) var(--d) forwards,flutter 5s ease-in-out calc(var(--d) + .7s) infinite alternate}
-  .branch .fruit{opacity:0;translate:0 -24px;animation:drop .6s cubic-bezier(.3,1.5,.6,1) var(--d) forwards,swing 4.5s ease-in-out calc(var(--d) + .6s) infinite alternate}
-  .branch .fruit:nth-of-type(2){animation-duration:.6s,5.2s}
+  .branch .leaf{scale:0;animation:unfold .9s cubic-bezier(.22,1.15,.36,1) var(--d) forwards,flutter 10s calc(var(--d) + .9s) infinite}
+  .branch .fruit{opacity:0;translate:0 -18px;animation:drop 1.1s cubic-bezier(.22,1.1,.36,1) var(--d) forwards,swing 9s calc(var(--d) + 1.1s) infinite}
+  .branch .fruit:nth-of-type(2){animation-duration:1.1s,10.4s}
   @keyframes fade-in{to{opacity:1}}
   @keyframes unfold{to{scale:1}}
   @keyframes drop{to{opacity:1;translate:0 0}}
-  @keyframes bough-sway{from{rotate:-1deg}to{rotate:1.2deg}}
-  @keyframes flutter{from{rotate:-2.5deg}to{rotate:3deg}}
-  @keyframes swing{from{rotate:-3deg}to{rotate:3deg}}
+  @keyframes bough-sway{0%{rotate:0deg;animation-timing-function:cubic-bezier(.61,1,.88,1)}25%{rotate:1.1deg;animation-timing-function:cubic-bezier(.37,0,.63,1)}75%{rotate:-1deg;animation-timing-function:cubic-bezier(.12,0,.39,0)}100%{rotate:0deg}}
+  @keyframes flutter{0%{rotate:0deg;animation-timing-function:cubic-bezier(.61,1,.88,1)}25%{rotate:2.75deg;animation-timing-function:cubic-bezier(.37,0,.63,1)}75%{rotate:-2.75deg;animation-timing-function:cubic-bezier(.12,0,.39,0)}100%{rotate:0deg}}
+  @keyframes swing{0%{rotate:0deg;animation-timing-function:cubic-bezier(.61,1,.88,1)}25%{rotate:3deg;animation-timing-function:cubic-bezier(.37,0,.63,1)}75%{rotate:-3deg;animation-timing-function:cubic-bezier(.12,0,.39,0)}100%{rotate:0deg}}
 }
 </style>
 </head>
